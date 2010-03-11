@@ -96,7 +96,7 @@ function skipWeekend(date, inc, excl) {
 /* Date Parsing
 -----------------------------------------------------------------------------*/
 
-var parseDate = fc.parseDate = function(s) {
+var parseDate = fc.parseDate = function(s, ignoreTimezone) {
 	if (typeof s == 'object') { // already a Date object
 		return s;
 	}
@@ -107,7 +107,7 @@ var parseDate = fc.parseDate = function(s) {
 		if (s.match(/^\d+$/)) { // a UNIX timestamp
 			return new Date(parseInt(s) * 1000);
 		}
-		return parseISO8601(s, true) || (s ? new Date(s) : null);
+		return parseISO8601(s, ignoreTimezone) || (s ? new Date(s) : null);
 	}
 	// TODO: never return invalid dates (like from new Date(<string>)), return null instead
 	return null;
